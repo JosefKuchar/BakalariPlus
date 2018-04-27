@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="results">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="res"/>
+        <xs:element type="xs:string" name="typ"/>
+        <xs:element type="xs:string" name="ikod" />
+        <xs:element type="xs:string" name="salt"/>
+        <xs:element type="xs:string" name="pheslo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

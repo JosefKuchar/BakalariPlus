@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="results">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="verze"/>
+        <xs:element type="xs:string" name="jmeno"/>
+        <xs:element type="xs:string" name="typ"/>
+        <xs:element type="xs:string" name="strtyp"/>
+        <xs:element type="xs:string" name="skola"/>
+        <xs:element type="xs:string" name="typskoly"/>
+        <xs:element type="xs:string" name="trida"/>
+        <xs:element type="xs:integer" name="rocnik"/>
+        <xs:element type="xs:string" name="moduly"/>
+        <xs:element name="params">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:integer" name="newmarkdays"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="result"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

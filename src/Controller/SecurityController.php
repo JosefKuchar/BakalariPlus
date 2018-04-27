@@ -31,46 +31,38 @@ class SecurityController extends Controller
             return new Response("Přihlašovací stránka není dostupná, zkontrolujte URL", Response::HTTP_UNAUTHORIZED);
         }
 
-        $xml = @simplexml_load_string($login_page);
-        
+        $xml = new \DOMDocument();
+        @$xml->loadXML($login_page);
 
-        if ($xml === false) {
-            return new Response("Server vrátil nevalidní odpoveď, zkuste to znovu", Response::HTTP_UNAUTHORIZED);
-        }
-
-        $children = ['res', 'salt', 'ikod', 'typ'];
-
-        // FIXME
-        foreach($children as $child) {
-            if (!isset($xml[$child])) {
-                // Invalid XML
-            }
-        }
-
-        if ($xml->res === '02') {
+        if (!@$xml->schemaValidate(SCHEMAS . 'token.xsd')) {
             return new Response("Špatné přihlašovací jméno", Response::HTTP_UNAUTHORIZED);
         }
 
-        $plain = $xml->salt . $xml->ikod . $xml->typ . $request->get('password');
+        $result =  $xml->getElementsByTagName('results')->item(0);
+
+        $plain = $result->getElementsByTagName('salt')->item(0)->nodeValue .
+                $result->getElementsByTagName('ikod')->item(0)->nodeValue . 
+                $result->getElementsByTagName('typ')->item(0)->nodeValue . 
+                $request->get('password');
         $hash = base64_encode(hash("sha512", $plain, true)); 
         $plain_token = '*login*' . $request->get('username') . '*pwd*' . $hash . '*sgn*ANDR' . date('Ymd');
         $api_token = base64_encode(hash("sha512", $plain_token, true)); 
         $api_token = str_replace('\\', '_', $api_token);
         $api_token = str_replace('/', '_', $api_token);
         $api_token = str_replace('+', '-', $api_token);
-
+        
         $url = $request->get('url') . '?' . http_build_query([
             'hx' => $api_token,
             'pm' => 'login'
         ]);
+        
+        $data = @file_get_contents($url);
+        //TODO: check
 
-        $xml = @simplexml_load_string(@file_get_contents($url));
+        $xml = new \DOMDocument();
+        @$xml->loadXML($data);
 
-        if ($xml === false) {
-            return new Response("Server vrátil nevalidní odpoveď, zkuste to znovu", Response::HTTP_UNAUTHORIZED);
-        }
-
-        if ($xml->results->result == '-1') {
+        if (!$xml->schemaValidate(SCHEMAS . 'login.xsd')) {
             return new Response("Špatné přihlašovací jméno nebo heslo", Response::HTTP_UNAUTHORIZED);
         }
 
