@@ -7,7 +7,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element type="xs:string" name="typ"/>
-              <xs:element type="xs:interger" name="kodcyklu"/>
+              <xs:element type="xs:integer" name="kodcyklu"/>
               <xs:element type="xs:string" name="zkratkacyklu"/>
               <xs:element type="xs:string" name="nazevcyklu"/>
               <xs:element name="hodiny">
