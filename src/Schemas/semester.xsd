@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="results">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="tabulka">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pololeti">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="polo" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:integer" name="sloupec"/>
+                          <xs:element type="xs:integer" name="rok"/>
+                          <xs:element type="xs:integer" name="rocnik"/>
+                          <xs:element type="xs:string" name="rocnikslovy"/>
+                          <xs:element type="xs:string" name="pololeti"/>
+                          <xs:element type="xs:string" name="opak"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="predmety">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="predmet" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="nazev"/>
+                          <xs:element name="znamky">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="znamka" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:integer" name="sloupec"/>
+                                      <xs:element type="xs:string" name="value"/>
+                                      <xs:element type="xs:string" name="opak"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="souhrny">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="souhrn" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:integer" name="rocnik"/>
+                    <xs:element type="xs:string" name="rocnikslovy"/>
+                    <xs:element type="xs:integer" name="pololeti"/>
+                    <xs:element type="xs:string" name="prumer"/>
+                    <xs:element type="xs:string" name="zameskane"/>
+                    <xs:element type="xs:string" name="neomluvene"/>
+                    <xs:element type="xs:string" name="hodnoceni"/>
+                    <xs:element type="xs:string" name="vysvedceni"/>
+                    <xs:element type="xs:string" name="opak"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="vychovna"/>
+        <xs:element type="xs:integer" name="result"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

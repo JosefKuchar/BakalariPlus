@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="results">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="predmety">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="predmet" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="nazev"/>
+                    <xs:element type="xs:string" name="zkratka"/>
+                    <xs:element type="xs:string" name="prumer"/>
+                    <xs:element type="xs:string" name="numprumer"/>
+                    <xs:element type="xs:string" name="prepocet"/>
+                    <xs:element type="xs:string" name="bodytoznm"/>
+                    <xs:element type="xs:string" name="ctvrt"/>
+                    <xs:element type="xs:string" name="pozn"/>
+                    <xs:element type="xs:string" name="globpozn"/>
+                    <xs:element name="znamky">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="znamka" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="pred"/>
+                                <xs:element type="xs:decimal" name="maxb"/>
+                                <xs:element type="xs:string" name="znamka"/>
+                                <xs:element type="xs:string" name="zn"/>
+                                <xs:element type="xs:decimal" name="bd"/>
+                                <xs:element type="xs:string" name="datum"/>
+                                <xs:element type="xs:string" name="udeleno"/>
+                                <xs:element type="xs:integer" name="vaha"/>
+                                <xs:element type="xs:string" name="caption"/>
+                                <xs:element type="xs:string" name="poznamka"/>
+                                <xs:element type="xs:string" name="typ"/>
+                                <xs:element type="xs:string" name="ozn"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:integer" name="result"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

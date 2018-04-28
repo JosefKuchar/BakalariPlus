@@ -12,6 +12,7 @@ class MainController extends Controller
      */
     public function index()
     {
+        echo $this->get('session')->get('token');
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);

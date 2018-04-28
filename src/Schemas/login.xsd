@@ -19,7 +19,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element type="xs:string" name="result"/>
+        <xs:element type="xs:integer" name="result"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

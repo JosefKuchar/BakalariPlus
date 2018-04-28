@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="results">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="rozvrh">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="typ"/>
+              <xs:element type="xs:interger" name="kodcyklu"/>
+              <xs:element type="xs:string" name="zkratkacyklu"/>
+              <xs:element type="xs:string" name="nazevcyklu"/>
+              <xs:element name="hodiny">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:integer" name="pocet"/>
+                    <xs:element name="hod" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:integer" name="caption"/>
+                          <xs:element type="xs:string" name="begintime"/>
+                          <xs:element type="xs:string" name="endtime"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="dny">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:integer" name="pocet"/>
+                    <xs:element name="den" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="zkratka"/>
+                          <xs:element type="xs:string" name="datum"/>
+                          <xs:element name="hodiny">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="hod" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:choice maxOccurs="unbounded" minOccurs="0">
+                                      <xs:element type="xs:string" name="idcode"/>
+                                      <xs:element type="xs:string" name="typ"/>
+                                      <xs:element type="xs:string" name="zkrpr"/>
+                                      <xs:element type="xs:string" name="pr"/>
+                                      <xs:element type="xs:string" name="zkruc"/>
+                                      <xs:element type="xs:string" name="uc"/>
+                                      <xs:element type="xs:string" name="zkrmist"/>
+                                      <xs:element type="xs:string" name="mist"/>
+                                      <xs:element type="xs:string" name="zkrabs"/>
+                                      <xs:element type="xs:string" name="abs"/>
+                                      <xs:element type="xs:string" name="tema"/>
+                                      <xs:element type="xs:string" name="zkrskup"/>
+                                      <xs:element type="xs:string" name="skup"/>
+                                      <xs:element type="xs:string" name="cycle"/>
+                                      <xs:element type="xs:string" name="uvol"/>
+                                      <xs:element type="xs:string" name="chng"/>
+                                      <xs:element type="xs:integer" name="caption"/>
+                                      <xs:element type="xs:string" name="notice"/>
+                                      <xs:element type="xs:string" name="zkratka"/>
+                                    </xs:choice>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:integer" name="result"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
