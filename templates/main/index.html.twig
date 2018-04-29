@@ -4,41 +4,42 @@
     <link rel="stylesheet" href="style.css">
 {% endblock %}
 
+{% block javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="index.js"></script>
+{% endblock %}
+
 {% block body %}
-    <div class="container-fluid">
+    <script>
+        window.__INITIAL_DATA__ = '{{ data|json_encode|raw }}'
+    </script>
+
+    <div class="container-fluid" id="app">
         <div class="row">
             <aside class="col-3 px-1 bg-dark position-fixed">
                 ...
             </aside>
             <main class="col offset-3">
-                <h1>Josef Kuchař, S1E</h1>
-                <table class="table">
+                <h1>${ name }</h1>
+                <table class="table table-bordered">
                     <tr>
                         <th></th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        <th>6</th>
-                        <th>7</th>
-                        <th>8</th>
-                        <th>9</th>
+                        <th v-for="column in schedule.header">
+                            ${ column.caption }
+                            ${ column.start }
+                            ${ column.end }
+                        </th>
                     </tr>
-                    <tr>
-                        <td>Pondělí</td>
-                    </tr>
-                    <tr>
-                        <td>Úterý</td>
-                    </tr>
-                    <tr>
-                        <td>Středa</td>
-                    </tr>
-                    <tr>
-                        <td>Čtvrtek</td>
-                    </tr>
-                    <tr>
-                        <td>Pátek</td>
+                    <tr v-for="day in schedule.days">
+                        <td>
+                            ${ day.name }
+                            ${ day.date }
+                        </td>
+                        <td v-for="hour in day.hours" v-bind:class="{ change: hour.change != undefined && hour.change != '' }">
+                            ${ hour.shortName }
+                            ${ hour.shortTeacher }
+                            ${ hour.room}
+                        </td>
                     </tr>
                 </table>
             </main>
