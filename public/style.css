@@ -2,6 +2,23 @@ aside {
     min-height: 100vh !important;
 }
 
+td {
+    transition: background-color 0.1s ease;
+}
+
+td:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+td.change:hover {
+    background-color: #158def;
+}
+
 .change {
-    background-color: dodgerblue;
+    background-color: #42a4f4;
+}
+
+.table-big {
+    font-size: 1.6em;
 }

@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.1/locale/cs.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="index.js"></script>
 {% endblock %}
@@ -21,22 +23,22 @@
             </aside>
             <main class="col offset-3">
                 <h1>${ name }</h1>
-                <table class="table table-bordered">
-                    <tr>
+                <table class="table table-bordered text-center">
+                    <tr class="thead-dark">
                         <th></th>
                         <th v-for="column in schedule.header">
-                            ${ column.caption }
+                            <div class="table-big">${ column.caption }</div>
                             ${ column.start }
                             ${ column.end }
                         </th>
                     </tr>
                     <tr v-for="day in schedule.days">
                         <td>
-                            ${ day.name }
-                            ${ day.date }
+                            <div class="table-big">${ dayConvert(day.name) }</div>
+                            ${ dateConvert(day.date) }
                         </td>
                         <td v-for="hour in day.hours" v-bind:class="{ change: hour.change != undefined && hour.change != '' }">
-                            ${ hour.shortName }
+                            <div class="table-big">${ hour.shortName }</div>
                             ${ hour.shortTeacher }
                             ${ hour.room}
                         </td>

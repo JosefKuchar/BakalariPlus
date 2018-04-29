@@ -73,6 +73,10 @@ class MainController extends Controller
         return $data;
     }
 
+    public function getMarks() {
+        $raw = $this->getXML('znamky', 'grades.xsd');
+    }
+
     public function getXML($module, $schema, $arguments = array()) {
         // Get session object
         $session = $this->get('session');
