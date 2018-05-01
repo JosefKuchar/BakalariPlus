@@ -60,6 +60,7 @@
                                       <xs:element type="xs:integer" name="caption"/>
                                       <xs:element type="xs:string" name="notice"/>
                                       <xs:element type="xs:string" name="zkratka"/>
+                                      <xs:element type="xs:string" name="nazev"/>
                                     </xs:choice>
                                   </xs:complexType>
                                 </xs:element>

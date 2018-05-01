@@ -45,11 +45,13 @@ class MainController extends Controller
             foreach($raw_hours as $hour) {
                 $mapping = array (
                     'zkrpr' => 'shortName',
+                    'zkratka' => 'shortName',
                     'zkruc' => 'shortTeacher',
                     'chng' => 'change',
                     'zkrmist' => 'room',
                     'uc' => 'teacher',
-                    'pr' => 'name'
+                    'pr' => 'name',
+                    'nazev' => 'name'
                 );
 
                 $hours[] = $this->getArrayFromElement($hour, $mapping);
@@ -89,6 +91,8 @@ class MainController extends Controller
         
         // Download data
         $data = @file_get_contents($url);
+
+        //echo htmlspecialchars($data);
 
         // Check data
         if ($data === false) {
