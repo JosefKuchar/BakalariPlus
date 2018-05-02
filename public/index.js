@@ -4,7 +4,7 @@ var app = new Vue({
     data: JSON.parse(window.__INITIAL_DATA__),
     methods: {
         dateConvert: function(date) {
-            return moment(date, "YYYYMMDD").format('l')
+            return moment(date, 'YYYYMMDD').format('l')
         },
         dayConvert: function(day) {
             switch (day) {

@@ -28,7 +28,7 @@
                                 <xs:element type="xs:decimal" name="maxb"/>
                                 <xs:element type="xs:string" name="znamka"/>
                                 <xs:element type="xs:string" name="zn"/>
-                                <xs:element type="xs:decimal" name="bd"/>
+                                <xs:element type="xs:string" name="bd"/>
                                 <xs:element type="xs:string" name="datum"/>
                                 <xs:element type="xs:string" name="udeleno"/>
                                 <xs:element type="xs:integer" name="vaha"/>

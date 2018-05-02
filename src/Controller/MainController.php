@@ -15,7 +15,8 @@ class MainController extends Controller
         return $this->render('main/index.html.twig', [
             'data' => array(
                 'name' => $this->get('session')->get('token'),
-                'schedule' => $this->getSchedule()
+                'schedule' => $this->getSchedule(),
+                'marks' => $this->getMarks()
             )
         ]);
     }
@@ -76,7 +77,41 @@ class MainController extends Controller
     }
 
     public function getMarks() {
-        $raw = $this->getXML('znamky', 'grades.xsd');
+        $raw = $this->getXML('znamky', 'marks.xsd');
+
+        $rawSubjects = $raw->getElementsByTagName('predmet');
+        $subjects = array();
+
+        foreach ($rawSubjects as $subject) {
+            $rawMarks = $subject->getElementsByTagName('znamky')->item(0)->childNodes;
+            $marks = array();
+
+            foreach($rawMarks as $mark) {
+                if ($mark->nodeType !== 1) {
+                    continue;
+                }
+
+                $mapping = array(
+                    'datum' => 'date',
+                    'vaha' => 'weight',
+                    'znamka' => 'value',
+                    'caption' => 'name'
+                );
+
+                $marks[] = $this->getArrayFromElement($mark, $mapping);
+            }
+
+            $mapping = array(
+                'nazev' => 'name',
+                'zkratka' => 'shortName',
+            );
+
+            $subjects[] = $this->getArrayFromElement($subject, $mapping) + array(
+                'marks' => $marks
+            );
+        }
+
+        return $subjects;
     }
 
     public function getXML($module, $schema, $arguments = array()) {
@@ -91,8 +126,6 @@ class MainController extends Controller
         
         // Download data
         $data = @file_get_contents($url);
-
-        //echo htmlspecialchars($data);
 
         // Check data
         if ($data === false) {
