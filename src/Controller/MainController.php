@@ -13,12 +13,12 @@ class MainController extends Controller
     public function index()
     {
         return $this->render('main/index.html.twig', [
-            'data' => array(
+            'data' => [
                 'info' => $this->getGeneralInfo(),
                 'schedule' => $this->getSchedule(),
                 'marks' => $this->getMarks(),
                 'token' => $this->get('session')->get('token')
-            )
+            ]
         ]);
     }
 
@@ -27,25 +27,25 @@ class MainController extends Controller
         $raw_header = $raw->getElementsByTagName('hodiny')->item(0)->getElementsByTagName('hod');
         $raw_days = $raw->getElementsByTagName('dny')->item(0)->getElementsByTagName('den');
 
-        $header = array();
-        $days = array();
+        $header = [];
+        $days = [];
         
         foreach($raw_header as $column) {
-            $mapping = array (
+            $mapping = [
                 'caption' => 'caption',
                 'begintime' => 'start',
                 'endtime' => 'end'
-            );
+            ];
 
             $header[] = $this->getArrayFromElement($column, $mapping);
         }
 
         foreach($raw_days as $day) {
             $raw_hours = $day->getElementsByTagName('hod');
-            $hours = array();
+            $hours = [];
 
             foreach($raw_hours as $hour) {
-                $mapping = array (
+                $mapping = [
                     'zkrpr' => 'shortName',
                     'zkratka' => 'shortName',
                     'zkruc' => 'shortTeacher',
@@ -54,25 +54,25 @@ class MainController extends Controller
                     'uc' => 'teacher',
                     'pr' => 'name',
                     'nazev' => 'name'
-                );
+                ];
 
                 $hours[] = $this->getArrayFromElement($hour, $mapping);
             }
 
-            $mapping = array(
+            $mapping = [
                 'zkratka' => 'name',
                 'datum' => 'date'
-            );
+            ];
 
-            $days[] = $this->getArrayFromElement($day, $mapping) + array(
+            $days[] = $this->getArrayFromElement($day, $mapping) + [
                 'hours' => $hours
-            );
+            ];
         }
 
-        $data = array(
+        $data = [
             'header' => $header,
             'days' => $days
-        );
+        ];
 
         return $data;
     }
@@ -81,35 +81,35 @@ class MainController extends Controller
         $raw = $this->getXML('znamky', 'marks.xsd');
 
         $rawSubjects = $raw->getElementsByTagName('predmet');
-        $subjects = array();
+        $subjects = [];
 
         foreach ($rawSubjects as $subject) {
             $rawMarks = $subject->getElementsByTagName('znamky')->item(0)->childNodes;
-            $marks = array();
+            $marks = [];
 
             foreach($rawMarks as $mark) {
                 if ($mark->nodeType !== 1) {
                     continue;
                 }
 
-                $mapping = array(
+                $mapping = [
                     'datum' => 'date',
                     'vaha' => 'weight',
                     'znamka' => 'value',
                     'caption' => 'name'
-                );
+                ];
 
                 $marks[] = $this->getArrayFromElement($mark, $mapping);
             }
 
-            $mapping = array(
+            $mapping = [
                 'nazev' => 'name',
                 'zkratka' => 'shortName',
-            );
+            ];
 
-            $subjects[] = $this->getArrayFromElement($subject, $mapping) + array(
+            $subjects[] = $this->getArrayFromElement($subject, $mapping) + [
                 'marks' => $marks
-            );
+            ];
         }
 
         return $subjects;
@@ -131,7 +131,7 @@ class MainController extends Controller
         return $this->getArrayFromElement($raw, $mapping);
     }
 
-    public function getXML($module, $schema, $arguments = array()) {
+    public function getXML($module, $schema, $arguments = []) {
         // Get session object
         $session = $this->get('session');
 
@@ -167,7 +167,7 @@ class MainController extends Controller
     }
 
     public function getArrayFromElement($node, $mapping) {
-        $data = array();
+        $data = [];
 
         foreach ($mapping as $key=>$property) {
             $element = $node->getElementsByTagName($key)->item(0);
