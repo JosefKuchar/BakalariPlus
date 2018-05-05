@@ -14,9 +14,10 @@ class MainController extends Controller
     {
         return $this->render('main/index.html.twig', [
             'data' => array(
-                'name' => $this->get('session')->get('token'),
+                'info' => $this->getGeneralInfo(),
                 'schedule' => $this->getSchedule(),
-                'marks' => $this->getMarks()
+                'marks' => $this->getMarks(),
+                'token' => $this->get('session')->get('token')
             )
         ]);
     }
@@ -112,6 +113,22 @@ class MainController extends Controller
         }
 
         return $subjects;
+    }
+
+    public function getGeneralInfo() {
+        $raw = $this->getXML('login', 'login.xsd');
+
+        $mapping = [
+            'verze' => 'version',
+            'jmeno' => 'name',
+            'typ' => 'shortType',
+            'strtyp' => 'type',
+            'skola' => 'school',
+            'trida' => 'class',
+            'rocnik' => 'grade',
+        ];
+
+        return $this->getArrayFromElement($raw, $mapping);
     }
 
     public function getXML($module, $schema, $arguments = array()) {

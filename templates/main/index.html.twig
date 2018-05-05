@@ -22,7 +22,7 @@
                 ...
             </aside>
             <main class="col offset-3">
-                <h1>${ name }</h1>
+                <h1>${ info.name }</h1>
                 <table class="table table-bordered text-center">
                     <tr class="thead-dark">
                         <th></th>
@@ -44,6 +44,9 @@
                         </td>
                     </tr>
                 </table>
+                <p v-for="subject in marks">
+                    ${ subject.name }    
+                </p>
             </main>
         </div>
     </div>
